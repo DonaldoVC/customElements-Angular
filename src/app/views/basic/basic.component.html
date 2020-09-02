@@ -1,0 +1,67 @@
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<div class="card">
+    <div class="card-body">
+        <div class="row" style="margin-right: 0 !important; display: flex; justify-content: flex-end;">
+            <div style="margin-right: 10px;">
+                <button class="btn button-blue" (click)="open(openModal)">Usuario</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <table id="table" class="table table-responsive-sm table-striped" data-page-length="25">
+                    <thead>
+                    <tr>
+                        <th style="width: 5%">#</th>
+                        <th style="width: 20%">Nombre</th>
+                        <th style="width: 20%">Apellido Paterno</th>
+                        <th style="width: 20%">Apellido Materno</th>
+                        <th style="width: 20%">Correo Electrónico</th>
+                        <th style="width: 10%; text-align: center">Modificar</th>
+                        <th style="width: 10%; text-align: center">Eliminar</th>
+                    </tr>
+                    </thead>
+                    <tbody class="tbody">
+                    <tr *ngFor="let user of table; let i = index">
+                        <td style="width: 5%">{{ i + 1 }}</td>
+                        <td style="width: 20%">{{ user.name }}</td>
+                        <td style="width: 20%">{{ user.first_name }}</td>
+                        <td style="width: 20%">{{ user.last_name }}</td>
+                        <td style="width: 20%">{{ user.email }}</td>
+                        <td style="width: 10%; text-align: center">
+                            <i (click)="open(openModal);" class="fa fa-edit" aria-hidden="true"></i>
+                        </td>
+                        <td style="width: 10%; text-align: center">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #openModal let-c="close" let-d="dismiss">
+    <form (ngSubmit)="d('Cross click')">
+        <div class="modal-header" style="background-color: #545D6E">
+            <h5 class="modal-title" style="color: white">Nuevo Usuario</h5>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')" style="color: white">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-12" style="margin-bottom: 20px;">
+                    <label for="name">Nombre</label>
+                    <input type="text" formControlName="name" class="form-control" id="name" placeholder="Nombre">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn button-red btn-sm" (click)="c('')">Cancelar</button>
+            <button type="submit" class="btn button-blue btn-sm" >Crear</button>
+        </div>
+    </form>
+</ng-template>
